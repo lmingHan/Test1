@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Switch</title>
+<link href="../../../common/css/bootstrap.min.css" rel="stylesheet" />
+<link href="../../../common/css/bootstrap-switch.min.css" rel="stylesheet" />
+<link href="../../css/app.css" rel="stylesheet" />
+<script src="../../../common/js/jquery-3.3.1.min.js"></script>
+<script src="../../../common/js/angular.min.js"></script>
+<script src="../../../common/js/ui-bootstrap-tpls.js"></script>
+<script src="../../../common/js/bootstrap-switch.min.js"></script>
+</head>
+<!-- Bootstrap-Switch源码地址：https://github.com/nostalgiaz/bootstrap-switch
+Bootstrap-Switch文档以及Demo：http://www.bootstrap-switch.org/examples.html
+常用的属性
+size：开关大小。可选值有'mini', 'small', 'normal', 'large'
+onColor：开关中开按钮的颜色。可选值有'primary', 'info', 'success', 'warning', 'danger', 'default'
+offColor：开关中关按钮的颜色。可选值'primary', 'info', 'success', 'warning', 'danger', 'default'
+onText：开关中开按钮的文本，默认是“ON”。
+offText：开关中关按钮的文本，默认是“OFF”。
+onInit：初始化组件的事件。
+onSwitchChange：开关变化时的事件。 -->
+<body ng-app="myapp">
+	<!-- demo -->
+	<div ng-controller="myctra">
+		<!-- <button type="button" ng-click="test()">propconsole</button> -->
+		<!-- 控件 -->
+		<!-- <my-input model="prop" fun = "sub"></my-input> -->
+		<input type="checkbox" name="switch" checked />
+	</div>
+
+	<script type="text/javascript">
+		var appModule = angular.module('myapp', []);
+
+		appModule.controller('myctra', [ '$scope', function($scope) {
+			$scope.prop = true;
+			/* $scope.test = function() {
+				console.log($scope.prop);
+			}; */
+
+			var c = $("[name='switch']");
+			//c.bootstrapSwitch('state', $scope.prop); // true || false
+			c.bootstrapSwitch({
+				state : $scope.prop,
+				onText : "启动",
+				offText : "停止",
+				onColor : "success",
+				offColor : "danger",
+			});
+			c.on('switchChange.bootstrapSwitch', function(event, state) {
+				console.log(state); // true | false
+			});
+		} ]);
+
+		//控件
+		/* appModule
+				.directive(
+						'myInput',
+						function() {
+							return {
+								restrict : "E",
+								scope : {
+									model : "=",
+									fun : "="
+								},
+								template : '<div class="switch"></div>',
+								replace : true,
+								link : function(scope, element, attr) {
+									var $input = $('<input type="checkbox" name="switch" checked>');
+									$(element[0]).append($input);
+									var c = $(element[0]).children();
+									c.bootstrapSwitch('state', scope.model); // true || false
+									c.on('switchChange.bootstrapSwitch',
+											function(event, state) {
+												scope.fun(state);
+											});
+								}
+							}
+						}); */
+	</script>
+</body>
+</html>

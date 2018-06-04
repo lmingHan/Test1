@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="ui.bootstrap.demo" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Typeahead</title>
+<link href="../../../common/css/bootstrap.min.css" rel="stylesheet" />
+<link href="../../css/app.css" rel="stylesheet" />
+<script src="../../../common/js/angular.min.js"></script>
+<script src="../../../common/js/ui-bootstrap-tpls.js"></script>
+<script>
+	angular.module('ui.bootstrap.demo', [ 'ui.bootstrap' ]).controller(
+			'TypeaheadCtrl', function($scope) {
+				$scope.selected = undefined;
+				$scope.names = [ {
+					'name' : '张三',
+					'ename' : 'zhangsan'
+				}, {
+					'name' : '李四',
+					'ename' : 'lisi'
+				}, {
+					'name' : '王五',
+					'ename' : 'wangwu'
+				} ];
+			});
+</script>
+
+</head>
+<body>
+	<div ng-controller="TypeaheadCtrl">
+		<input type="text" ng-model="selected"
+			uib-typeahead="n.name as n.name+'('+n.ename+')' for n in names | filter:$viewValue | limitTo:8"
+			class="form-control">
+	</div>
+</body>
+</html>
